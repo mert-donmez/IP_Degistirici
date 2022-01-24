@@ -1,7 +1,7 @@
-# IP_Degistirici
+# IP_Degistirici![License](https://img.shields.io/badge/License-MIT-red.svg)
 TOR ağı kullanılarak istenilen süre aralığında ip değiştirme programı
 
-### kullanımı:
+## Kullanımı:
 - tor ağını başlat:
 `service tor start`
 
@@ -18,3 +18,11 @@ TOR ağı kullanılarak istenilen süre aralığında ip değiştirme programı
 
 - Belirlenen şifreyi ve istenilen IP değiştirme süresini girip 'Baslat' butonuna tıklayın.
 ![Screenshot from 2022-01-24 21-05-25](https://user-images.githubusercontent.com/83416622/150839365-84f62d63-b725-4295-9d69-352beafd32d7.png)
+
+### Gerekenler:
+- linux işletim sistemi
+- python2,python3
+- python-tk
+- tor
+- git
+- nano veya benzer editör
