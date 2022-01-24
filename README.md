@@ -6,7 +6,7 @@ TOR ağı kullanılarak istenilen süre aralığında ip değiştirme programı
 `service tor start`
 
 - tor'dan şifre al:
-`tor --hash-password "şifre"`
+`tor --hash-password "şifre"` (tırnak işaretlerini silip istediğiniz şifresi yazın.
 - `/etc/tor/torrc` dosyasındaki 'HashedControlPassword' kısmını yorum satırından kaldır ve tor tarafından verilen tokeni yapıştır.
 - Control Port 9051 kısmını yorum satırından kaldır
 
