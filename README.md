@@ -8,7 +8,7 @@ TOR ağı kullanılarak istenilen süre aralığında ip değiştirme programı
 - tor'dan şifre al:
 `tor --hash-password "şifre"` (tırnak işaretlerini silip istediğiniz şifreyi yazın.)
 - `/etc/tor/torrc` dosyasındaki 'HashedControlPassword' kısmını yorum satırından kaldır ve tor tarafından verilen tokeni yapıştır.
-- Control Port 9051 kısmını yorum satırından kaldır
+- `/etc/tor/torrc` dosyasındaki Control Port 9051 kısmını yorum satırından kaldır
 
 - 'toriptables' dosyasına gelip komutu çalıştır:
 `python3 toriptables3.py -l` 
