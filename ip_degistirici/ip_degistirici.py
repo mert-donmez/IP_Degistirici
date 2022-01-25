@@ -1,4 +1,4 @@
-#python2 ile yazildi
+#! /usr/bin/env python2
 
 from commands import getoutput
 from json import load
@@ -17,7 +17,7 @@ class Switcher(Tk):
   def __init__(self):
     Tk.__init__(self)
     self.resizable(0, 0)
-    self.title(string="IP DEGISTIRICI")
+    self.title(string="TOR IP Switcher")
 
     self.host = StringVar()
     self.port = IntVar()
@@ -31,8 +31,8 @@ class Switcher(Tk):
 
     Label(self, text='Host:').grid(row=1, column=1, sticky=E)
     Label(self, text='Port:').grid(row=2, column=1, sticky=E)
-    Label(self, text='Sifre:').grid(row=3, column=1, sticky=E)
-    Label(self, text='IP degisme Suresi:').grid(row=4, column=1, sticky=E)
+    Label(self, text='Password:').grid(row=3, column=1, sticky=E)
+    Label(self, text='Interval:').grid(row=4, column=1, sticky=E)
 
     Entry(self, textvariable=self.host).grid(row=1, column=2, columnspan=2)
     Entry(self, textvariable=self.port).grid(row=2, column=2, columnspan=2)
@@ -40,8 +40,8 @@ class Switcher(Tk):
           row=3, column=2, columnspan=2)
     Entry(self, textvariable=self.time).grid(row=4, column=2, columnspan=2)
 
-    Button(self, text='Baslat', command=self.start).grid(row=5, column=2)
-    Button(self, text='Durdur', command=self.stop).grid(row=5, column=3)
+    Button(self, text='Start', command=self.start).grid(row=5, column=2)
+    Button(self, text='Stop', command=self.stop).grid(row=5, column=3)
 
     self.output = ScrolledText(
         self,
@@ -55,13 +55,13 @@ class Switcher(Tk):
     self.output.grid(row=1, column=4, rowspan=5, padx=4, pady=4)
 
   def start(self):
-    self.write('IP degistirici baslatiliyor.')
+    self.write('TOR Switcher starting.')
     self.ident = random()
     start_new_thread(self.newnym, ())
 
   def stop(self):
     try:
-      self.write('IP degistirici durduruluyor.')
+      self.write('TOR Switcher stopping.')
     except:
       pass
     self.ident = random()
@@ -76,7 +76,7 @@ class Switcher(Tk):
       print('[%02i:%02i:%02i] %s\n' % (t[3], t[4], t[5], message))
 
   def error(self):
-    showerror('IP degistirici', 'Tor daemon calismiyor!')
+    showerror('TOR IP Switcher', 'Tor daemon not running!')
 
   def newnym(self):
     key = self.ident
@@ -88,23 +88,23 @@ class Switcher(Tk):
     try:
       telnet = Telnet(host, port)
       if passwd == '':
-        telnet.write("Dogrulama\r\n")
+        telnet.write("AUTHENTICATE\r\n")
       else:
-        telnet.write("Dogrulama \"%s\"\r\n" % (passwd))
+        telnet.write("AUTHENTICATE \"%s\"\r\n" % (passwd))
       res = telnet.read_until('250 OK', 5)
 
       if res.find('250 OK') > -1:
-        self.write('Dogrulama onaylandi.')
+        self.write('AUTHENTICATE accepted.')
       else:
-        self.write('Kontrol cevaplandi,' + "\n"
-                   'Yanlis sifre: "%s"' % (passwd))
+        self.write('Control responded,' + "\n"
+                   'Incorrect password: "%s"' % (passwd))
         key = self.ident + 1
-        self.write('Cikiliyor.')
+        self.write('Quitting.')
     except Exception:
-      self.write('Bir hata olustu!')
+      self.write('There was an error!')
       self.error()
       key = self.ident + 1
-      self.write('Cikiliyor.')
+      self.write('Quitting.')
 
     while key == self.ident:
       try:
@@ -115,15 +115,15 @@ class Switcher(Tk):
             my_new_ident = load(urlopen('https://check.torproject.org/api/ip'))['IP']
           except (URLError, ValueError):
             my_new_ident = getoutput('wget -qO - ifconfig.me')
-          self.write('IP adresin %s' % (my_new_ident))
+          self.write('Your IP is %s' % (my_new_ident))
         else:
           key = self.ident + 1
-          self.write('Cikiliyor.')
+          self.write('Quitting.')
         sleep(interval)
       except Exception, ex:
-        self.write('Bir hata olustu: %s.' % (ex))
+        self.write('There was an error: %s.' % (ex))
         key = self.ident + 1
-        self.write('Cikiliyor.')
+        self.write('Quitting.')
 
     try:
       telnet.write("QUIT\r\n")
