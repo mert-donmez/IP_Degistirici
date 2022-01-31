@@ -20,8 +20,8 @@ TOR ağı kullanılarak istenilen süre aralığında ip değiştirme programı
 ![Screenshot from 2022-01-24 21-05-25](https://user-images.githubusercontent.com/83416622/150839365-84f62d63-b725-4295-9d69-352beafd32d7.png)
 
 ### Gerekenler:
-- linux işletim sistemi
-- python2,python3
+- python2.xx
+- python3.xx
 - python-tk
 - tor
 - git
