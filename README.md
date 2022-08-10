@@ -1,5 +1,5 @@
 # IP_Degistirici![License](https://img.shields.io/badge/License-MIT-red.svg) 
-TOR ağı kullanılarak istenilen süre aralığında ip değiştirme programı by Rupe
+TOR ağı kullanılarak istenilen süre aralığında ip değiştirme programı
 
 ### Gerekenler:
 - python2.xx
